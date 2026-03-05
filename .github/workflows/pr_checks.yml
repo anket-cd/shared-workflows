@@ -72,15 +72,16 @@ jobs:
       - name: 🧾 Commitlint Validation (Inline Config)
         uses: wagoid/commitlint-github-action@v6
         with:
-          commitlintConfig: |
-            {
-              "extends": ["@commitlint/config-conventional"],
-              "rules": {
-                "type-enum": [2, "always", [${{ toJson(fromJSON(format('["{0}"]', join(inputs.types, '","')))) }}]],
-                "scope-empty": [2, "${{ inputs.requireScope && 'never' || 'always' }}"],
-                "subject-pattern": [2, "always", "${{ inputs.subjectPattern }}"],
-                "header-max-length": [2, "always", 100],
-                "footer-leading-blank": [1, "always"],
-                "body-leading-blank": [1, "always"]
-              }
-            }
+          configFile: commitlint.config.js
+          # commitlintConfig: |
+          #   {
+          #     "extends": ["@commitlint/config-conventional"],
+          #     "rules": {
+          #       "type-enum": [2, "always", [${{ toJson(fromJSON(format('["{0}"]', join(inputs.types, '","')))) }}]],
+          #       "scope-empty": [2, "${{ inputs.requireScope && 'never' || 'always' }}"],
+          #       "subject-pattern": [2, "always", "${{ inputs.subjectPattern }}"],
+          #       "header-max-length": [2, "always", 100],
+          #       "footer-leading-blank": [1, "always"],
+          #       "body-leading-blank": [1, "always"]
+          #     }
+          #   }
