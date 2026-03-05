@@ -72,7 +72,7 @@ jobs:
       - name: 🧾 Commitlint Validation (Inline Config)
         uses: wagoid/commitlint-github-action@v6
         with:
-          configFile: commitlint.config.js
+          configFile: commitlint.config.cjs
           # commitlintConfig: |
           #   {
           #     "extends": ["@commitlint/config-conventional"],
