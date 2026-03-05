@@ -61,6 +61,20 @@ jobs:
             exit 1
           fi
 
+      - name: 🏷️ Check PR labels
+        if: ${{ inputs.checkLabels && github.event.pull_request.head.repo.fork == false }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          labels=$(gh api repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/labels --jq '.[].name')
+
+          if [ -z "$labels" ]; then
+            echo "::error::No labels found on this PR. Please add at least one label."
+            exit 1
+          else
+            echo "PR has labels"
+          fi
+
   validate-commits:
     name: 🧾 Validate Commit Messages
     runs-on: ubuntu-latest
