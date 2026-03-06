@@ -1,87 +1,17 @@
----
-name: '🔍 PR Validation'
+name: PR Validation
 
 on:
-  workflow_call:
-    inputs:
-      types:
-        required: false
-        type: string
-        default: |
-          fix
-          feat
-          docs
-          ci
-          chore
-          test
-          refactor
-          style
-          perf
-          build
-          revert
-      requireScope:
-        required: false
-        type: boolean
-        default: false
-      subjectPattern:
-        required: false
-        type: string
-        default: '^[A-Z].+$'
-      validateSingleCommit:
-        required: false
-        type: boolean
-        default: false
-      checkLabels:
-        required: false
-        type: boolean
-        default: true
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
 
 jobs:
-
-  validate-title:
-    name: 📝 Validate PR Title
-    runs-on: ubuntu-latest
-    steps:
-      - uses: amannn/action-semantic-pull-request@v6.1.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          types: ${{ inputs.types }}
-          requireScope: ${{ inputs.requireScope }}
-          subjectPattern: ${{ inputs.subjectPattern }}
-          validateSingleCommit: ${{ inputs.validateSingleCommit }}
-
-      - name: 🏷️ Check PR labels
-        if: ${{ inputs.checkLabels }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ -z "$(gh api repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/labels --jq '.[].name')" ]; then
-            echo "::error::No labels found on this PR. Please add at least one label."
-            exit 1
-          fi
-
-  validate-commits:
-    name: 🧾 Validate Commit Messages
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: 🧾 Commitlint Validation (Inline Config)
-        uses: wagoid/commitlint-github-action@v6
-        with:
-          configFile: commitlint.config.cjs
-          # commitlintConfig: |
-          #   {
-          #     "extends": ["@commitlint/config-conventional"],
-          #     "rules": {
-          #       "type-enum": [2, "always", [${{ toJson(fromJSON(format('["{0}"]', join(inputs.types, '","')))) }}]],
-          #       "scope-empty": [2, "${{ inputs.requireScope && 'never' || 'always' }}"],
-          #       "subject-pattern": [2, "always", "${{ inputs.subjectPattern }}"],
-          #       "header-max-length": [2, "always", 100],
-          #       "footer-leading-blank": [1, "always"],
-          #       "body-leading-blank": [1, "always"]
-          #     }
-          #   }
+  pr-validation:
+    if: github.actor != 'dependabot[bot]'
+    uses: clouddrove/github-shared-workflows/.github/workflows/pr_checks.yml@2.1.0
+    secrets: inherit
+    with:
+      subjectPattern: '^.+$'
