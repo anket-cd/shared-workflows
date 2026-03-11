@@ -1,7 +1,9 @@
 ---
 name: Update Major Version
 run-name: Move ${{ github.event.inputs.major_version }} to ${{ github.event.inputs.target }}
-
+#########
+# we trigger manually
+#########
 on:
   workflow_dispatch:
     inputs:
