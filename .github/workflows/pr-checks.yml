@@ -73,4 +73,8 @@ jobs:
         uses: wagoid/commitlint-github-action@v6
         with:
           configFile: commitlint.config.cjs
+
+      - name: 🏷️ Check PR labels
+        run: |
+            echo "Hi Aniket, Your Workflows Doing Great..."
 ...
