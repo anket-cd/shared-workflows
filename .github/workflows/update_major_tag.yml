@@ -1,57 +1,43 @@
-name: Update Major Version
-run-name: Move major tag to ${{ github.event.inputs.target }}
+name: Update Major Tag
 
 on:
-  workflow_dispatch:
-    inputs:
-      target:
-        description: "Target release tag (example: 3.0.0)"
-        required: true
+  push:
+    tags:
+      - "v*.*.*"
 
 permissions:
   contents: write
 
 jobs:
-  tag:
+  update-tag:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📦 Checkout Repository
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🔄 Fetch tags
-        run: git fetch --tags
-
-      - name: ⚙️ Configure Git
+      - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Detect major version
+      - name: Extract version
         id: version
         run: |
-          TAG="${{ github.event.inputs.target }}"
+          TAG=${GITHUB_REF#refs/tags/}
 
-          echo "Target tag: $TAG"
+          echo "Release tag: $TAG"
 
-          # Remove 'v' if present
-          VERSION=${TAG#v}
+          MAJOR=$(echo $TAG | cut -d. -f1)
 
-          # Extract major version
-          MAJOR=$(echo "$VERSION" | cut -d. -f1)
-
-          MAJOR_TAG="v$MAJOR"
-
-          echo "Major tag: $MAJOR_TAG"
-
-          echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
+          echo "major_tag=$MAJOR" >> $GITHUB_OUTPUT
 
       - name: Update major tag
         run: |
-          git tag -f ${{ steps.version.outputs.major_tag }} ${{ github.event.inputs.target }}
+          git tag -f ${{ steps.version.outputs.major_tag }} ${{ github.ref_name }}
 
-      - name: Push updated tag
+      - name: Push major tag
         run: |
           git push origin ${{ steps.version.outputs.major_tag }} --force
