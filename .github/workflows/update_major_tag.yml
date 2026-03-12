@@ -1,3 +1,4 @@
+---
 name: Update Major Version
 run-name: Move major tag to latest release
 
@@ -43,3 +44,4 @@ jobs:
       - name: Push updated tag
         run: |
           git push origin ${{ steps.version.outputs.major_tag }} --force
+...
