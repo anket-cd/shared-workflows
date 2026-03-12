@@ -1,47 +1,44 @@
----
-name: Update Major Version Second
-run-name: Move ${{ github.event.inputs.major_version }} to ${{ github.event.inputs.target }}
-#########
-# we trigger manually
-#########
-on:
-  workflow_dispatch:
-    inputs:
-      target:
-        description: "Target release tag (example: v1.2.0)"
-        required: true
-      major_version:
-        description: "Major version to update"
-        required: true
-        type: choice
-        options:
-          - v1
-          - v2
+# ---
+# name: Update Major Version Second
+# run-name: Move ${{ github.event.inputs.major_version }} to ${{ github.event.inputs.target }}
 
-permissions:
-  contents: write
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       target:
+#         description: "Target release tag (example: v1.2.0)"
+#         required: true
+#       major_version:
+#         description: "Major version to update"
+#         required: true
+#         type: choice
+#         options:
+#           - v1
+#           - v2
 
-jobs:
-  tag:
-    runs-on: ubuntu-latest
+# permissions:
+#   contents: write
 
-    steps:
-      - name: 📦 Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+# jobs:
+#   tag:
+#     runs-on: ubuntu-latest
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#     steps:
+#       - name: 📦 Checkout Repository
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
 
-      - name: Update major tag
-        run: |
-          git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
+#       - name: Configure Git
+#         run: |
+#           git config user.name "github-actions[bot]"
+#           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Push updated tag
-        run: |
-          git push origin ${{ github.event.inputs.major_version }} --force
-...
-      
+#       - name: Update major tag
+#         run: |
+#           git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
+
+#       - name: Push updated tag
+#         run: |
+#           git push origin ${{ github.event.inputs.major_version }} --force
+# ...
