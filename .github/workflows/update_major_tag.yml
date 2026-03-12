@@ -3,7 +3,7 @@ name: Update Major Tag
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "*.*.*"
 
 permissions:
   contents: write
@@ -18,21 +18,29 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch tags
+        run: git fetch --tags
+
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Extract version
+      - name: Extract major version
         id: version
         run: |
           TAG=${GITHUB_REF#refs/tags/}
 
           echo "Release tag: $TAG"
 
-          MAJOR=$(echo $TAG | cut -d. -f1)
+          # Extract major version from X.Y.Z
+          MAJOR=$(echo "$TAG" | cut -d. -f1)
 
-          echo "major_tag=$MAJOR" >> $GITHUB_OUTPUT
+          MAJOR_TAG="v$MAJOR"
+
+          echo "Major tag: $MAJOR_TAG"
+
+          echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
 
       - name: Update major tag
         run: |
