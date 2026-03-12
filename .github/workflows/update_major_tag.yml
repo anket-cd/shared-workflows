@@ -1,12 +1,8 @@
 name: Update Major Version
-run-name: Move major tag to ${{ github.event.inputs.target }}
+run-name: Move major tag to latest release
 
 on:
   workflow_dispatch:
-    inputs:
-      target:
-        description: "Target release tag (example: 2.0.1)"
-        required: true
 
 permissions:
   contents: write
@@ -26,22 +22,32 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Detect major version from latest tag
+      - name: Detect latest tag and major version
         id: version
         run: |
-          TAG="${{ github.event.inputs.target }}"
-          
-          # Extract major version (before first dot)
-          MAJOR=$(echo "$TAG" | cut -d. -f1)
+          # Get latest tag sorted by version
+          LATEST_TAG=$(git tag --sort=-v:refname | head -n 1)
 
-          # Attach v prefix
-          MAJOR_TAG="v$MAJOR"
+          echo "Latest tag: $LATEST_TAG"
 
+          # Extract major version
+          MAJOR=$(echo "$LATEST_TAG" | cut -d. -f1)
+
+          # Attach v prefix if not present
+          if [[ "$MAJOR" != v* ]]; then
+            MAJOR_TAG="v$MAJOR"
+          else
+            MAJOR_TAG="$MAJOR"
+          fi
+
+          echo "Major tag: $MAJOR_TAG"
+
+          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
 
       - name: Update major tag
         run: |
-          git tag -f ${{ steps.version.outputs.major_tag }} ${{ github.event.inputs.target }}
+          git tag -f ${{ steps.version.outputs.major_tag }} ${{ steps.version.outputs.latest_tag }}
 
       - name: Push updated tag
         run: |
