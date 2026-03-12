@@ -1,4 +1,3 @@
----
 name: Update Major Version
 run-name: Move major tag to latest release
 
@@ -19,29 +18,43 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
+      - name: 🔄 Fetch all tags
+        run: git fetch --tags
+
+      - name: ⚙️ Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Detect latest tag and major version
+      - name: 🔍 Detect latest tag and major version
         id: version
         run: |
           LATEST_TAG=$(git tag --sort=-v:refname | head -n 1)
 
-          echo "Latest tag: $LATEST_TAG"
+          if [ -z "$LATEST_TAG" ]; then
+            echo "❌ No tags found in repository"
+            exit 1
+          fi
 
-          MAJOR=$(echo "$LATEST_TAG" | cut -d. -f1)
+          echo "Latest tag detected: $LATEST_TAG"
+
+          # Remove 'v' prefix if present
+          VERSION=${LATEST_TAG#v}
+
+          # Extract major version
+          MAJOR=$(echo "$VERSION" | cut -d. -f1)
+
           MAJOR_TAG="v$MAJOR"
+
+          echo "Major tag to update: $MAJOR_TAG"
 
           echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
 
-      - name: Update major tag
+      - name: 🏷 Update major tag
         run: |
           git tag -f ${{ steps.version.outputs.major_tag }} ${{ steps.version.outputs.latest_tag }}
 
-      - name: Push updated tag
+      - name: 🚀 Push updated tag
         run: |
           git push origin ${{ steps.version.outputs.major_tag }} --force
-...
