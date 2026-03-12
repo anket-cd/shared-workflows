@@ -1,5 +1,5 @@
 ---
-name: Update Major Version
+name: Update Major Version Second
 run-name: Move ${{ github.event.inputs.major_version }} to ${{ github.event.inputs.target }}
 #########
 # we trigger manually
