@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  workflows: write
 
 jobs:
   tag:
@@ -25,22 +26,12 @@ jobs:
       - name: Detect latest tag and major version
         id: version
         run: |
-          # Get latest tag sorted by version
           LATEST_TAG=$(git tag --sort=-v:refname | head -n 1)
 
           echo "Latest tag: $LATEST_TAG"
 
-          # Extract major version
           MAJOR=$(echo "$LATEST_TAG" | cut -d. -f1)
-
-          # Attach v prefix if not present
-          if [[ "$MAJOR" != v* ]]; then
-            MAJOR_TAG="v$MAJOR"
-          else
-            MAJOR_TAG="$MAJOR"
-          fi
-
-          echo "Major tag: $MAJOR_TAG"
+          MAJOR_TAG="v$MAJOR"
 
           echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
