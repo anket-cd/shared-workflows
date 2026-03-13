@@ -76,5 +76,5 @@ jobs:
 
       - name: test tag
         run: |
-            echo "Hi Aniket, Your v5 --> 5.0.1 Workflows Doing Great..."
+            echo "Hi Aniket, Your v6 Workflows Doing Great..."
 ...
