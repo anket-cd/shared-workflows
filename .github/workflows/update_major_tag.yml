@@ -9,6 +9,8 @@ permissions:
 
 jobs:
   update-tag:
+    # Run only when release is marked as latest
+    if: github.event.release.make_latest == 'true'
     runs-on: ubuntu-latest
 
     steps:
