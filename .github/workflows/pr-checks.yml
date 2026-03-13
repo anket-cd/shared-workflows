@@ -74,7 +74,7 @@ jobs:
         with:
           configFile: commitlint.config.cjs
 
-      - name: 🏷️ Check PR labels
+      - name: test tag
         run: |
-            echo "Hi Aniket, Your Workflows Doing Great..."
+            echo "Hi Aniket, Your v5 --> 5.0.1 Workflows Doing Great..."
 ...
