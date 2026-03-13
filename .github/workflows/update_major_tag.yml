@@ -1,4 +1,4 @@
-name: Update Major Tag in vX format
+name: Update Major Tag
 
 on:
   release:
@@ -8,10 +8,10 @@ permissions:
   contents: write
 
 jobs:
-  update-tag:
-    # Run only when release is marked as latest
-    if: github.event.release.prerelease == false && github.event.release.draft == false
+  check-tag:
     runs-on: ubuntu-latest
+    outputs:
+      valid: ${{ steps.check.outputs.valid }}
 
     steps:
       - name: Check tag format
@@ -26,48 +26,120 @@ jobs:
             echo "Tag format valid"
           else
             echo "valid=false" >> $GITHUB_OUTPUT
-            echo "Tag format invalid. Workflow will skip."
+            echo "Tag format invalid"
           fi
 
+  update-major-tag:
+    needs: check-tag
+    if: needs.check-tag.outputs.valid == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout repo
-        if: steps.check.outputs.valid == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Fetch tags
-        if: steps.check.outputs.valid == 'true'
         run: git fetch --tags
 
       - name: Configure git
-        if: steps.check.outputs.valid == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Extract major version
-        if: steps.check.outputs.valid == 'true'
         id: version
         run: |
           TAG=${{ github.event.release.tag_name }}
-
           MAJOR=$(echo "$TAG" | cut -d. -f1)
           MAJOR_TAG="v$MAJOR"
 
           echo "Major tag: $MAJOR_TAG"
-
           echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
 
       - name: Update major tag
-        if: steps.check.outputs.valid == 'true'
         run: |
           git tag -f ${{ steps.version.outputs.major_tag }} ${{ github.event.release.tag_name }}
 
       - name: Push major tag
-        if: steps.check.outputs.valid == 'true'
         run: |
           git push origin ${{ steps.version.outputs.major_tag }} --force
 
+
+# 1 one
+# name: Update Major Tag in vX format
+
+# on:
+#   release:
+#     types: [published]
+
+# permissions:
+#   contents: write
+
+# jobs:
+#   update-tag:
+#     # Run only when release is marked as latest
+#     if: github.event.release.prerelease == false && github.event.release.draft == false
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Check tag format
+#         id: check
+#         run: |
+#           TAG=${{ github.event.release.tag_name }}
+
+#           echo "Release tag: $TAG"
+
+#           if [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+#             echo "valid=true" >> $GITHUB_OUTPUT
+#             echo "Tag format valid"
+#           else
+#             echo "valid=false" >> $GITHUB_OUTPUT
+#             echo "Tag format invalid. Workflow will skip."
+#           fi
+
+#       - name: Checkout repo
+#         if: steps.check.outputs.valid == 'true'
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       - name: Fetch tags
+#         if: steps.check.outputs.valid == 'true'
+#         run: git fetch --tags
+
+#       - name: Configure git
+#         if: steps.check.outputs.valid == 'true'
+#         run: |
+#           git config user.name "github-actions[bot]"
+#           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+#       - name: Extract major version
+#         if: steps.check.outputs.valid == 'true'
+#         id: version
+#         run: |
+#           TAG=${{ github.event.release.tag_name }}
+
+#           MAJOR=$(echo "$TAG" | cut -d. -f1)
+#           MAJOR_TAG="v$MAJOR"
+
+#           echo "Major tag: $MAJOR_TAG"
+
+#           echo "major_tag=$MAJOR_TAG" >> $GITHUB_OUTPUT
+
+#       - name: Update major tag
+#         if: steps.check.outputs.valid == 'true'
+#         run: |
+#           git tag -f ${{ steps.version.outputs.major_tag }} ${{ github.event.release.tag_name }}
+
+#       - name: Push major tag
+#         if: steps.check.outputs.valid == 'true'
+#         run: |
+#           git push origin ${{ steps.version.outputs.major_tag }} --force
+
+
+# 2 two
 # name: Update Major Tag
 
 # on:
