@@ -5,8 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [2.1.1] - 2026-03-16
-### :sparkles: New Features
-- [`f9ab1c2`](https://github.com/clouddrove/github-shared-workflows/commit/f9ab1c2430a95d69083cbc5309502a1fc0b5fbcd) - **tf-checks**: add role-to-assume support for AWS authentication in tf-checks workflow *(PR [#332](https://github.com/clouddrove/github-shared-workflows/pull/332) by [@ramnivas-cd](https://github.com/ramnivas-cd))*
+
 - [`a26d1ab`](https://github.com/clouddrove/github-shared-workflows/commit/a26d1abb482f8615f50f54e3e5ca2b9ed0e349d4) - handle PR validation for forked repository contributions *(PR [#336](https://github.com/clouddrove/github-shared-workflows/pull/336) by [@anket-cd](https://github.com/anket-cd))*
 - [`3f5f04a`](https://github.com/clouddrove/github-shared-workflows/commit/3f5f04aeaf2695df870f7e3fff6647ea685b8323) - Replace semantic PR action with fork-safe PR title validation *(PR [#337](https://github.com/clouddrove/github-shared-workflows/pull/337) by [@anket-cd](https://github.com/anket-cd))*
 - [`e84897b`](https://github.com/clouddrove/github-shared-workflows/commit/e84897b38bb66b47925c80e5482c2e32ee76c26b) - **ci**: add workflow to update major version tag for shared workflows *(PR [#339](https://github.com/clouddrove/github-shared-workflows/pull/339) by [@anket-cd](https://github.com/anket-cd))*
@@ -14,7 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### :bug: Bug Fixes
 - [`3be9d9d`](https://github.com/clouddrove/github-shared-workflows/commit/3be9d9d050ad4620cb0e029b35e217540c7068f4) - **ci**: update PR validation workflow pr-checks.yml to use types, subjectPattern and validateSingleCommit inputs *(PR [#338](https://github.com/clouddrove/github-shared-workflows/pull/338) by [@hahirwar-cd](https://github.com/hahirwar-cd))*
 
-### :construction_worker: Build System
 - [`a631b4a`](https://github.com/clouddrove/github-shared-workflows/commit/a631b4aa65f9d29e3abfb779be2872ed2bf93c3b) - **deps**: bump docker/build-push-action from 6 to 7 *(PR [#333](https://github.com/clouddrove/github-shared-workflows/pull/333) by [@dependabot[bot]](https://github.com/apps/dependabot))*
 - [`997469c`](https://github.com/clouddrove/github-shared-workflows/commit/997469c290ba5baa6df86d2e3bd0b50c5fadafe0) - **deps**: bump docker/setup-buildx-action from 3.12.0 to 4.0.0 *(PR [#334](https://github.com/clouddrove/github-shared-workflows/pull/334) by [@dependabot[bot]](https://github.com/apps/dependabot))*
 - [`1c43f71`](https://github.com/clouddrove/github-shared-workflows/commit/1c43f71cb95be532a4ee848596eb73953dde517c) - **deps**: bump aws-actions/configure-aws-credentials from 5 to 6 *(PR [#335](https://github.com/clouddrove/github-shared-workflows/pull/335) by [@dependabot[bot]](https://github.com/apps/dependabot))*
