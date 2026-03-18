@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   changelog:
     uses: clouddrove/github-shared-workflows/.github/workflows/release-changelog.yml@fix/workflows-docs
