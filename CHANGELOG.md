@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.8] - 2026-03-23
+### :bug: Bug Fixes
+- [`33184d3`](https://github.com/anket-cd/shared-workflows/commit/33184d3897dd3231575e85921ed6a6b91d8e3a35) - update naming format *(commit by [@anket-cd](https://github.com/anket-cd))*
+
+
 ## [2.1.1] - 2026-03-16
 
 - [`a26d1ab`](https://github.com/clouddrove/github-shared-workflows/commit/a26d1abb482f8615f50f54e3e5ca2b9ed0e349d4) - handle PR validation for forked repository contributions *(PR [#336](https://github.com/clouddrove/github-shared-workflows/pull/336) by [@anket-cd](https://github.com/anket-cd))*
@@ -597,3 +602,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.4.2]: https://github.com/clouddrove/github-shared-workflows/compare/1.4.1...1.4.2
 [2.1.0]: https://github.com/clouddrove/github-shared-workflows/compare/2.0.0...2.1.0
 [2.1.1]: https://github.com/clouddrove/github-shared-workflows/compare/2.1.0...2.1.1
+[3.1.8]: https://github.com/anket-cd/shared-workflows/compare/3.1.7...3.1.8
