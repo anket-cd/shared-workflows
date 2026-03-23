@@ -16,4 +16,4 @@ jobs:
       tag_format: X.Y.Z
       release_tag: ${{ github.ref_name }}
     secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.TOKEN_GITHUB }}
