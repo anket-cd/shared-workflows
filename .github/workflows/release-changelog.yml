@@ -4,12 +4,16 @@
 #   release:
 #     types: [published]
 
+# permissions:
+#   contents: write
+#   pull-requests: write
+
 # jobs:
 #   changelog:
 #     uses: clouddrove/github-shared-workflows/.github/workflows/release-changelog.yml@fix/workflows-docs
 #     with:
 #       branch: master
-#       tag_format: X.Y.Z
+#       tag_format: vX.Y.Z
 #       release_tag: ${{ github.ref_name }}
 #     secrets:
-#       GITHUB: ${{ secrets.GITHUB_TOKEN }}
+#       GITHUB: ${{ secrets.TOKEN_GITHUB }}

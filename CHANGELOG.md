@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.2.8] - 2026-03-26
+### :white_check_mark: Tests
+- [`f72e0b0`](https://github.com/anket-cd/shared-workflows/commit/f72e0b02370a1feae70b3d9ad934a77e1b20b777) - tast release tag workflows *(commit by [@anket-cd](https://github.com/anket-cd))*
+- [`34aea27`](https://github.com/anket-cd/shared-workflows/commit/34aea2744b9039feb5aada6c2ed238063f54645c) - tast release tag workflows *(commit by [@anket-cd](https://github.com/anket-cd))*
+- [`9490e93`](https://github.com/anket-cd/shared-workflows/commit/9490e937202ac0036ac36e362f3e99474d907d7d) - tast release tag workflows *(commit by [@anket-cd](https://github.com/anket-cd))*
+- [`7febc4d`](https://github.com/anket-cd/shared-workflows/commit/7febc4dda5f8a363ad0394479645616f9b0b6104) - tast release tag workflows *(commit by [@anket-cd](https://github.com/anket-cd))*
+
+
+## [3.1.8] - 2026-03-23
+### :bug: Bug Fixes
+- [`33184d3`](https://github.com/anket-cd/shared-workflows/commit/33184d3897dd3231575e85921ed6a6b91d8e3a35) - update naming format *(commit by [@anket-cd](https://github.com/anket-cd))*
+
+
 ## [2.1.1] - 2026-03-16
 
 - [`a26d1ab`](https://github.com/clouddrove/github-shared-workflows/commit/a26d1abb482f8615f50f54e3e5ca2b9ed0e349d4) - handle PR validation for forked repository contributions *(PR [#336](https://github.com/clouddrove/github-shared-workflows/pull/336) by [@anket-cd](https://github.com/anket-cd))*
@@ -597,3 +610,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.4.2]: https://github.com/clouddrove/github-shared-workflows/compare/1.4.1...1.4.2
 [2.1.0]: https://github.com/clouddrove/github-shared-workflows/compare/2.0.0...2.1.0
 [2.1.1]: https://github.com/clouddrove/github-shared-workflows/compare/2.1.0...2.1.1
+[3.1.8]: https://github.com/anket-cd/shared-workflows/compare/3.1.7...3.1.8
+[v1.2.8]: https://github.com/anket-cd/shared-workflows/compare/3.1.9...v1.2.8
