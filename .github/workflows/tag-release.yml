@@ -1,0 +1,16 @@
+name: Tag Release
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  handle-release:
+    if: github.event.pull_request.merged == true
+    uses: anket-cd/github-shared-workflows/.github/workflows/release-tagTest.yml@feat/release-workflows
+    with:
+      target_branch: ${{ github.event.pull_request.base.ref }}
+      tag_format: "vX.Y.Z"  # or "X.Y.Z" depending on your preference
+      # create_changelog: false  # 👈 Disable changelog generation
+    secrets:
+      GITHUB: ${{ secrets.TOKEN_GITHUB }}
