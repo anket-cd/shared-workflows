@@ -10,6 +10,7 @@ jobs:
     uses: anket-cd/github-shared-workflows/.github/workflows/release-tagTest.yml
     with:
       target_branch: ${{ github.event.pull_request.base.ref }}
+      release_tag: ${{ github.ref_name }}
       tag_format: "vX.Y.Z"  # or "X.Y.Z" depending on your preference
     secrets:
       GITHUB: ${{ secrets.GITHUB }}
