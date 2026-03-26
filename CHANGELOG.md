@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v7.0.4] - 2026-03-26
+### :white_check_mark: Tests
+- [`8ef6b36`](https://github.com/anket-cd/shared-workflows/commit/8ef6b36f24cdd2c6af168c1db0193607f8f4a035) - release tag workflows *(commit by [@anket-cd](https://github.com/anket-cd))*
+
+
 ## [v7.0.3] - 2026-03-26
 ### :white_check_mark: Tests
 - [`acd7156`](https://github.com/anket-cd/shared-workflows/commit/acd7156c3025b5156fd6f345c88fc1f0d932d466) - tast release tag workflows new *(commit by [@anket-cd](https://github.com/anket-cd))*
@@ -618,3 +623,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.1.8]: https://github.com/anket-cd/shared-workflows/compare/3.1.7...3.1.8
 [v1.2.8]: https://github.com/anket-cd/shared-workflows/compare/3.1.9...v1.2.8
 [v7.0.3]: https://github.com/anket-cd/shared-workflows/compare/v1.2.8...v7.0.3
+[v7.0.4]: https://github.com/anket-cd/shared-workflows/compare/v7.0.3...v7.0.4
