@@ -151,4 +151,5 @@ jobs:
       branch: ${{ inputs.target_branch }}
       tag_format: ${{ inputs.tag_format }}
       release_tag: ${{ needs.create-tag.outputs.final_tag }}
-  
+    secrets:
+      GITHUB: ${{ secrets.GITHUB }}
