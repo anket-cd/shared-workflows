@@ -45,7 +45,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB }}
 
       - name: 🧩 Install jq
         run: |
@@ -152,5 +151,4 @@ jobs:
       branch: ${{ inputs.target_branch }}
       tag_format: ${{ inputs.tag_format }}
       release_tag: ${{ needs.create-tag.outputs.final_tag }}
-    secrets:
-      GITHUB: ${{ secrets.GITHUB }}
+  
