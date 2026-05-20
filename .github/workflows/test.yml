@@ -1,0 +1,27 @@
+---
+name: changelog
+permissions: write-all
+on:
+  push: 
+    tags:
+      - '*'
+  workflow_dispatch:
+jobs:
+  changelog:
+    uses: clouddrove/github-shared-workflows/.github/workflows/release-changelog.yml@fix/major-tag
+    with:
+      branch: 'master'
+      tag_format: vX.Y.Z
+      release_tag: ${{ github.ref_name }}
+    secrets:
+      GITHUB: ${{ secrets.GITHUB }}
+
+  release-major-tag:
+    needs: changelog
+    if: always()
+    uses: clouddrove/github-shared-workflows/.github/workflows/release-maintain-major-tag.yml@fix/major-tag
+    with:
+      tag_name: ${{ github.ref_name }}
+    secrets:
+      GITHUB: ${{ secrets.GITHUB }}
+...
